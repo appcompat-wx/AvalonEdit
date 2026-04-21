@@ -27,25 +27,25 @@ namespace ICSharpCode.AvalonEdit.Utils
 		[Test]
 		public void ZeroIsNotCloseToOne()
 		{
-			Assert.That(0.0.IsClose(1), Is.False);
+			Assert.IsFalse(0.0.IsClose(1));
 		}
 		
 		[Test]
 		public void ZeroIsCloseToZero()
 		{
-			Assert.That(0.0.IsClose(0), Is.True);
+			Assert.IsTrue(0.0.IsClose(0));
 		}
 		
 		[Test]
 		public void InfinityIsCloseToInfinity()
 		{
-			Assert.That(double.PositiveInfinity.IsClose(double.PositiveInfinity), Is.True);
+			Assert.IsTrue(double.PositiveInfinity.IsClose(double.PositiveInfinity));
 		}
 		
 		[Test]
 		public void NaNIsNotCloseToNaN()
 		{
-			Assert.That(double.NaN.IsClose(double.NaN), Is.False);
+			Assert.IsFalse(double.NaN.IsClose(double.NaN));
 		}
 	}
 }

@@ -28,31 +28,31 @@ namespace ICSharpCode.AvalonEdit.Document
 		[Test]
 		public void TestGetWhitespaceAfter()
 		{
-			Assert.That(TextUtilities.GetWhitespaceAfter(new StringTextSource("a \t \tb"), 2), Is.EqualTo(new SimpleSegment(2, 3)));
+			Assert.AreEqual(new SimpleSegment(2, 3), TextUtilities.GetWhitespaceAfter(new StringTextSource("a \t \tb"), 2));
 		}
 		
 		[Test]
 		public void TestGetWhitespaceAfterDoesNotSkipNewLine()
 		{
-			Assert.That(TextUtilities.GetWhitespaceAfter(new StringTextSource("a \t \tb"), 2), Is.EqualTo(new SimpleSegment(2, 3)));
+			Assert.AreEqual(new SimpleSegment(2, 3), TextUtilities.GetWhitespaceAfter(new StringTextSource("a \t \tb"), 2));
 		}
 		
 		[Test]
 		public void TestGetWhitespaceAfterEmptyResult()
 		{
-			Assert.That(TextUtilities.GetWhitespaceAfter(new StringTextSource("a b"), 2), Is.EqualTo(new SimpleSegment(2, 0)));
+			Assert.AreEqual(new SimpleSegment(2, 0), TextUtilities.GetWhitespaceAfter(new StringTextSource("a b"), 2));
 		}
 		
 		[Test]
 		public void TestGetWhitespaceAfterEndOfString()
 		{
-			Assert.That(TextUtilities.GetWhitespaceAfter(new StringTextSource("a "), 2), Is.EqualTo(new SimpleSegment(2, 0)));
+			Assert.AreEqual(new SimpleSegment(2, 0), TextUtilities.GetWhitespaceAfter(new StringTextSource("a "), 2));
 		}
 		
 		[Test]
 		public void TestGetWhitespaceAfterUntilEndOfString()
 		{
-			Assert.That(TextUtilities.GetWhitespaceAfter(new StringTextSource("a \t \t"), 2), Is.EqualTo(new SimpleSegment(2, 3)));
+			Assert.AreEqual(new SimpleSegment(2, 3), TextUtilities.GetWhitespaceAfter(new StringTextSource("a \t \t"), 2));
 		}
 		#endregion
 		
@@ -60,31 +60,31 @@ namespace ICSharpCode.AvalonEdit.Document
 		[Test]
 		public void TestGetWhitespaceBefore()
 		{
-			Assert.That(TextUtilities.GetWhitespaceBefore(new StringTextSource("a\t \t b"), 4), Is.EqualTo(new SimpleSegment(1, 3)));
+			Assert.AreEqual(new SimpleSegment(1, 3), TextUtilities.GetWhitespaceBefore(new StringTextSource("a\t \t b"), 4));
 		}
 		
 		[Test]
 		public void TestGetWhitespaceBeforeDoesNotSkipNewLine()
 		{
-			Assert.That(TextUtilities.GetWhitespaceBefore(new StringTextSource("a\n b"), 3), Is.EqualTo(new SimpleSegment(2, 1)));
+			Assert.AreEqual(new SimpleSegment(2, 1), TextUtilities.GetWhitespaceBefore(new StringTextSource("a\n b"), 3));
 		}
 		
 		[Test]
 		public void TestGetWhitespaceBeforeEmptyResult()
 		{
-			Assert.That(TextUtilities.GetWhitespaceBefore(new StringTextSource(" a b"), 2), Is.EqualTo(new SimpleSegment(2, 0)));
+			Assert.AreEqual(new SimpleSegment(2, 0), TextUtilities.GetWhitespaceBefore(new StringTextSource(" a b"), 2));
 		}
 		
 		[Test]
 		public void TestGetWhitespaceBeforeStartOfString()
 		{
-			Assert.That(TextUtilities.GetWhitespaceBefore(new StringTextSource(" a"), 0), Is.EqualTo(new SimpleSegment(0, 0)));
+			Assert.AreEqual(new SimpleSegment(0, 0), TextUtilities.GetWhitespaceBefore(new StringTextSource(" a"), 0));
 		}
 		
 		[Test]
 		public void TestGetWhitespaceBeforeUntilStartOfString()
 		{
-			Assert.That(TextUtilities.GetWhitespaceBefore(new StringTextSource(" \t a"), 2), Is.EqualTo(new SimpleSegment(0, 2)));
+			Assert.AreEqual(new SimpleSegment(0, 2), TextUtilities.GetWhitespaceBefore(new StringTextSource(" \t a"), 2));
 		}
 		#endregion
 	}
