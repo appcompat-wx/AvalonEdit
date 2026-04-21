@@ -29,7 +29,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 		public void EmptyTreeList()
 		{
 			CompressingTreeList<string> list = new CompressingTreeList<string>(string.Equals);
-			Assert.That(list.Count, Is.EqualTo(0));
+			Assert.AreEqual(0, list.Count);
 			foreach (string v in list) {
 				Assert.Fail();
 			}
@@ -44,7 +44,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 			CompressingTreeList<string> list = new CompressingTreeList<string>(string.Equals);
 			list.InsertRange(0, billion, "A");
 			list.InsertRange(1, billion, "B");
-			Assert.That(list.Count, Is.EqualTo(2 * billion));
+			Assert.AreEqual(2 * billion, list.Count);
 			Assert.Throws<OverflowException>(delegate { list.InsertRange(2, billion, "C"); });
 		}
 		
@@ -57,7 +57,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 			list.Add(42);
 			list.Insert(0, 42);
 			list.Insert(1, 42);
-			Assert.That(list.ToArray(), Is.EqualTo(new[] { 42, 42, 42, 42, 42 }));
+			Assert.AreEqual(new[] { 42, 42, 42, 42, 42 }, list.ToArray());
 		}
 		
 		[Test]
@@ -67,15 +67,15 @@ namespace ICSharpCode.AvalonEdit.Utils
 			for (int i = 1; i <= 3; i++) {
 				list.InsertRange(list.Count, 2, i);
 			}
-			Assert.That(list.ToArray(), Is.EqualTo(new[] { 1, 1, 2, 2, 3, 3 }));
+			Assert.AreEqual(new[] { 1, 1, 2, 2, 3, 3 }, list.ToArray());
 			list.RemoveRange(1, 4);
-			Assert.That(list.ToArray(), Is.EqualTo(new[] { 1, 3 }));
+			Assert.AreEqual(new[] { 1, 3 }, list.ToArray());
 			list.Insert(1, 1);
 			list.InsertRange(2, 2, 2);
 			list.Insert(4, 1);
-			Assert.That(list.ToArray(), Is.EqualTo(new[] { 1, 1, 2, 2, 1, 3 }));
+			Assert.AreEqual(new[] { 1, 1, 2, 2, 1, 3 }, list.ToArray());
 			list.RemoveRange(2, 2);
-			Assert.That(list.ToArray(), Is.EqualTo(new[] { 1, 1, 1, 3 }));
+			Assert.AreEqual(new[] { 1, 1, 1, 3 }, list.ToArray());
 		}
 		
 		[Test]
@@ -85,9 +85,9 @@ namespace ICSharpCode.AvalonEdit.Utils
 			for (int i = 1; i <= 3; i++) {
 				list.InsertRange(list.Count, 2, i);
 			}
-			Assert.That(list.ToArray(), Is.EqualTo(new[] { 1, 1, 2, 2, 3, 3 }));
+			Assert.AreEqual(new[] { 1, 1, 2, 2, 3, 3 }, list.ToArray());
 			list.RemoveRange(3, 3);
-			Assert.That(list.ToArray(), Is.EqualTo(new[] { 1, 1, 2 }));
+			Assert.AreEqual(new[] { 1, 1, 2 }, list.ToArray());
 		}
 		
 		[Test]
@@ -97,9 +97,9 @@ namespace ICSharpCode.AvalonEdit.Utils
 			for (int i = 1; i <= 3; i++) {
 				list.InsertRange(list.Count, 2, i);
 			}
-			Assert.That(list.ToArray(), Is.EqualTo(new[] { 1, 1, 2, 2, 3, 3 }));
+			Assert.AreEqual(new[] { 1, 1, 2, 2, 3, 3 }, list.ToArray());
 			list.RemoveRange(0, 1);
-			Assert.That(list.ToArray(), Is.EqualTo(new[] { 1, 2, 2, 3, 3 }));
+			Assert.AreEqual(new[] { 1, 2, 2, 3, 3 }, list.ToArray());
 		}
 		
 		[Test]
@@ -109,9 +109,9 @@ namespace ICSharpCode.AvalonEdit.Utils
 			for (int i = 1; i <= 3; i++) {
 				list.InsertRange(list.Count, 2, i);
 			}
-			Assert.That(list.ToArray(), Is.EqualTo(new[] { 1, 1, 2, 2, 3, 3 }));
+			Assert.AreEqual(new[] { 1, 1, 2, 2, 3, 3 }, list.ToArray());
 			list.RemoveRange(0, 3);
-			Assert.That(list.ToArray(), Is.EqualTo(new[] { 2, 3, 3 }));
+			Assert.AreEqual(new[] { 2, 3, 3 }, list.ToArray());
 		}
 		
 		[Test]
@@ -121,8 +121,8 @@ namespace ICSharpCode.AvalonEdit.Utils
 			list.AddRange(new[] { 0, 1, 1, 0 });
 			int calls = 0;
 			list.Transform(i => { calls++; return i + 1; });
-			Assert.That(calls, Is.EqualTo(3));
-			Assert.That(list.ToArray(), Is.EqualTo(new[] { 1, 2, 2, 1 }));
+			Assert.AreEqual(3, calls);
+			Assert.AreEqual(new[] { 1, 2, 2, 1 }, list.ToArray());
 		}
 		
 		[Test]
@@ -131,7 +131,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 			CompressingTreeList<int> list = new CompressingTreeList<int>((a, b) => a == b);
 			list.AddRange(new[] { 0, 1, 1, 0 });
 			list.Transform(i => 0);
-			Assert.That(list.ToArray(), Is.EqualTo(new[] { 0, 0, 0, 0 }));
+			Assert.AreEqual(new[] { 0, 0, 0, 0 }, list.ToArray());
 		}
 		
 		[Test]
@@ -140,7 +140,7 @@ namespace ICSharpCode.AvalonEdit.Utils
 			CompressingTreeList<int> list = new CompressingTreeList<int>((a, b) => a == b);
 			list.AddRange(new[] { 0, 1, 1, 1, 0, 0 });
 			list.TransformRange(2, 3, i => 0);
-			Assert.That(list.ToArray(), Is.EqualTo(new[] { 0, 1, 0, 0, 0, 0 }));
+			Assert.AreEqual(new[] { 0, 1, 0, 0, 0, 0 }, list.ToArray());
 		}
 	}
 }

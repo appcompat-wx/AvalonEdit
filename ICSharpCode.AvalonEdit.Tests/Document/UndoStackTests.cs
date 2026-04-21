@@ -32,7 +32,7 @@ namespace ICSharpCode.AvalonEdit.Document
 			doc.Insert(1, "b");
 			doc.UndoStack.EndUndoGroup();
 			doc.UndoStack.Undo();
-			Assert.That(doc.Text, Is.Empty);
+			Assert.AreEqual("", doc.Text);
 		}
 		
 		[Test]
@@ -46,7 +46,7 @@ namespace ICSharpCode.AvalonEdit.Document
 			doc.Insert(1, "b");
 			doc.UndoStack.EndUndoGroup();
 			doc.UndoStack.Undo();
-			Assert.That(doc.Text, Is.EqualTo("a"));
+			Assert.AreEqual("a", doc.Text);
 		}
 		
 		[Test]
@@ -61,7 +61,7 @@ namespace ICSharpCode.AvalonEdit.Document
 			doc.Insert(1, "b");
 			doc.UndoStack.EndUndoGroup();
 			doc.UndoStack.Undo();
-			Assert.That(doc.Text, Is.EqualTo("a"));
+			Assert.AreEqual("a", doc.Text);
 		}
 		
 		[Test]
@@ -75,7 +75,7 @@ namespace ICSharpCode.AvalonEdit.Document
 			doc.Insert(1, "b");
 			doc.UndoStack.EndUndoGroup();
 			doc.UndoStack.Undo();
-			Assert.That(doc.Text, Is.Empty);
+			Assert.AreEqual("", doc.Text);
 		}
 		
 		class StubUndoableAction : IUndoableOperation

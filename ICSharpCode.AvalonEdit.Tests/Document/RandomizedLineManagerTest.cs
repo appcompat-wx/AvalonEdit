@@ -80,7 +80,7 @@ namespace ICSharpCode.AvalonEdit.Document
 				string newText = new string(buffer, 0, newTextLength);
 				string expectedText = document.Text.Remove(offset, length).Insert(offset, newText);
 				document.Replace(offset, length, newText);
-				Assert.That(document.Text, Is.EqualTo(expectedText));
+				Assert.AreEqual(expectedText, document.Text);
 				CheckLines();
 			}
 		}
@@ -94,24 +94,24 @@ namespace ICSharpCode.AvalonEdit.Document
 				char c = text[i];
 				if (c == '\r' && i + 1 < text.Length && text[i + 1] == '\n') {
 					DocumentLine line = document.GetLineByNumber(lineNumber);
-					Assert.That(line.LineNumber, Is.EqualTo(lineNumber));
-					Assert.That(line.DelimiterLength, Is.EqualTo(2));
-					Assert.That(line.Offset, Is.EqualTo(lineStart));
-					Assert.That(line.Length, Is.EqualTo(i - lineStart));
+					Assert.AreEqual(lineNumber, line.LineNumber);
+					Assert.AreEqual(2, line.DelimiterLength);
+					Assert.AreEqual(lineStart, line.Offset);
+					Assert.AreEqual(i - lineStart, line.Length);
 					i++; // consume \n
 					lineNumber++;
 					lineStart = i+1;
 				} else if (c == '\r' || c == '\n') {
 					DocumentLine line = document.GetLineByNumber(lineNumber);
-					Assert.That(line.LineNumber, Is.EqualTo(lineNumber));
-					Assert.That(line.DelimiterLength, Is.EqualTo(1));
-					Assert.That(line.Offset, Is.EqualTo(lineStart));
-					Assert.That(line.Length, Is.EqualTo(i - lineStart));
+					Assert.AreEqual(lineNumber, line.LineNumber);
+					Assert.AreEqual(1, line.DelimiterLength);
+					Assert.AreEqual(lineStart, line.Offset);
+					Assert.AreEqual(i - lineStart, line.Length);
 					lineNumber++;
 					lineStart = i+1;
 				}
 			}
-			Assert.That(document.LineCount, Is.EqualTo(lineNumber));
+			Assert.AreEqual(lineNumber, document.LineCount);
 		}
 		
 		[Test]
@@ -171,10 +171,10 @@ namespace ICSharpCode.AvalonEdit.Document
 				foreach (CollapsedLineSection cs in collapsedSections) {
 					if (cs.Start != null) {
 						expectedCount++;
-						Assert.That(treeSections.Contains(cs), Is.True);
+						Assert.IsTrue(treeSections.Contains(cs));
 					}
 				}
-				Assert.That(treeSections.Count, Is.EqualTo(expectedCount));
+				Assert.AreEqual(expectedCount, treeSections.Count);
 				CheckLines();
 				HeightTests.CheckHeights(document, heightTree);
 			}

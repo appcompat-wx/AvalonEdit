@@ -18,9 +18,7 @@
 
 using System;
 using System.Linq;
-
 using ICSharpCode.AvalonEdit.Document;
-
 using NUnit.Framework;
 
 namespace ICSharpCode.AvalonEdit.Search
@@ -34,99 +32,98 @@ namespace ICSharpCode.AvalonEdit.Search
 			var strategy = SearchStrategyFactory.Create("All", false, true, SearchMode.Normal);
 			var text = new StringTextSource(" FindAllTests ");
 			var results = strategy.FindAll(text, 0, text.TextLength).ToArray();
-
-
-			Assert.That(results, Is.Empty, "No results should be found!");
+			
+			Assert.IsEmpty(results, "No results should be found!");
 		}
-
+		
 		[Test]
 		public void SkipWordBorder()
 		{
 			var strategy = SearchStrategyFactory.Create("AllTests", false, true, SearchMode.Normal);
 			var text = new StringTextSource("name=\"{FindAllTests}\"");
 			var results = strategy.FindAll(text, 0, text.TextLength).ToArray();
-
-			Assert.That(results, Is.Empty, "No results should be found!");
+			
+			Assert.IsEmpty(results, "No results should be found!");
 		}
-
+		
 		[Test]
 		public void SkipWordBorder2()
 		{
 			var strategy = SearchStrategyFactory.Create("AllTests", false, true, SearchMode.Normal);
 			var text = new StringTextSource("name=\"FindAllTests ");
 			var results = strategy.FindAll(text, 0, text.TextLength).ToArray();
-
-			Assert.That(results, Is.Empty, "No results should be found!");
+			
+			Assert.IsEmpty(results, "No results should be found!");
 		}
-
+		
 		[Test]
 		public void SkipWordBorder3()
 		{
 			var strategy = SearchStrategyFactory.Create("// find", false, true, SearchMode.Normal);
 			var text = new StringTextSource("            // findtest");
 			var results = strategy.FindAll(text, 0, text.TextLength).ToArray();
-
-			Assert.That(results, Is.Empty, "No results should be found!");
+			
+			Assert.IsEmpty(results, "No results should be found!");
 		}
-
+		
 		[Test]
 		public void WordBorderTest()
 		{
 			var strategy = SearchStrategyFactory.Create("// find", false, true, SearchMode.Normal);
 			var text = new StringTextSource("            // find me");
 			var results = strategy.FindAll(text, 0, text.TextLength).ToArray();
-
-			Assert.That(results.Length, Is.EqualTo(1), "One result should be found!");
-			Assert.That(results[0].Offset, Is.EqualTo("            ".Length));
-			Assert.That(results[0].Length, Is.EqualTo("// find".Length));
+			
+			Assert.AreEqual(1, results.Length, "One result should be found!");
+			Assert.AreEqual("            ".Length, results[0].Offset);
+			Assert.AreEqual("// find".Length, results[0].Length);
 		}
-
+		
 		[Test]
 		public void ResultAtStart()
 		{
 			var strategy = SearchStrategyFactory.Create("result", false, true, SearchMode.Normal);
 			var text = new StringTextSource("result           // find me");
 			var results = strategy.FindAll(text, 0, text.TextLength).ToArray();
-
-			Assert.That(results.Length, Is.EqualTo(1), "One result should be found!");
-			Assert.That(results[0].Offset, Is.EqualTo(0));
-			Assert.That(results[0].Length, Is.EqualTo("result".Length));
+			
+			Assert.AreEqual(1, results.Length, "One result should be found!");
+			Assert.AreEqual(0, results[0].Offset);
+			Assert.AreEqual("result".Length, results[0].Length);
 		}
-
+		
 		[Test]
 		public void ResultAtEnd()
 		{
 			var strategy = SearchStrategyFactory.Create("me", false, true, SearchMode.Normal);
 			var text = new StringTextSource("result           // find me");
 			var results = strategy.FindAll(text, 0, text.TextLength).ToArray();
-
-			Assert.That(results.Length, Is.EqualTo(1), "One result should be found!");
-			Assert.That(results[0].Offset, Is.EqualTo("result           // find ".Length));
-			Assert.That(results[0].Length, Is.EqualTo("me".Length));
+			
+			Assert.AreEqual(1, results.Length, "One result should be found!");
+			Assert.AreEqual("result           // find ".Length, results[0].Offset);
+			Assert.AreEqual("me".Length, results[0].Length);
 		}
-
+		
 		[Test]
 		public void TextWithDots()
 		{
 			var strategy = SearchStrategyFactory.Create("Text", false, true, SearchMode.Normal);
 			var text = new StringTextSource(".Text.");
 			var results = strategy.FindAll(text, 0, text.TextLength).ToArray();
-
-			Assert.That(results.Length, Is.EqualTo(1), "One result should be found!");
-			Assert.That(results[0].Offset, Is.EqualTo(".".Length));
-			Assert.That(results[0].Length, Is.EqualTo("Text".Length));
+			
+			Assert.AreEqual(1, results.Length, "One result should be found!");
+			Assert.AreEqual(".".Length, results[0].Offset);
+			Assert.AreEqual("Text".Length, results[0].Length);
 		}
-
+		
 		[Test]
 		public void SimpleTest()
 		{
 			var strategy = SearchStrategyFactory.Create("AllTests", false, false, SearchMode.Normal);
 			var text = new StringTextSource("name=\"FindAllTests ");
 			var results = strategy.FindAll(text, 0, text.TextLength).ToArray();
-
-			Assert.That(results.Length, Is.EqualTo(1), "One result should be found!");
-			Assert.That(results[0].Offset, Is.EqualTo("name=\"Find".Length));
-			Assert.That(results[0].Length, Is.EqualTo("AllTests".Length));
+			
+			Assert.AreEqual(1, results.Length, "One result should be found!");
+			Assert.AreEqual("name=\"Find".Length, results[0].Offset);
+			Assert.AreEqual("AllTests".Length, results[0].Length);
 		}
 	}
 }
