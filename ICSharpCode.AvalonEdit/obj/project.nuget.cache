@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "eyEEuWsjKm4=",
+  "success": true,
+  "projectFilePath": "C:\\AppBuild\\AvalonEdit\\ICSharpCode.AvalonEdit\\ICSharpCode.AvalonEdit.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\appcompat\\.nuget\\packages\\microsoft.build.tasks.git\\1.1.1\\microsoft.build.tasks.git.1.1.1.nupkg.sha512",
+    "C:\\Users\\appcompat\\.nuget\\packages\\microsoft.sourcelink.common\\1.1.1\\microsoft.sourcelink.common.1.1.1.nupkg.sha512",
+    "C:\\Users\\appcompat\\.nuget\\packages\\microsoft.sourcelink.github\\1.1.1\\microsoft.sourcelink.github.1.1.1.nupkg.sha512"
+  ],
+  "logs": []
+}

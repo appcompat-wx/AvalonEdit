@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v11.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v11.0": {
+      "ICSharpCode.AvalonEdit/6.3": {
+        "runtime": {
+          "ICSharpCode.AvalonEdit.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ICSharpCode.AvalonEdit/6.3": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
